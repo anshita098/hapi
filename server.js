@@ -1,7 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Inhert = require('Inhert');
+const Inert = require('Inert');
 const server =  Hapi.server({
     host:'localhost',
     port:8000,
@@ -10,14 +10,14 @@ const server =  Hapi.server({
 (async()=> {server.route({
     method:'GET',
     path:'/',
-    handler:(request,reply) => {
-        return 'hello';
+    handler:(request,h) => {
+        return h.file('./public/hello.html');
     }
 });
 
-await server.register({
-    Inhert,
-});
+await server.register(
+    Inert
+);
 
 try{
     await server.start();
@@ -27,5 +27,3 @@ catch(err){
 }
 console.log('server running')
 })();
-
-start();
